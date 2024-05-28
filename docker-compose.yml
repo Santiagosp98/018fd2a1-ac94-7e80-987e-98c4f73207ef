@@ -1,0 +1,34 @@
+services:
+  postgres:
+    image: postgres:${PG_VERSION}
+    volumes:
+      - pgdata:/var/lib/postgresql/data
+    environment:
+      POSTGRES_USER: ${DATABASE_USER}
+      POSTGRES_PASSWORD: ${DATABASE_PASSWORD}
+      POSTGRES_DB: ${DATABASE_NAME}
+
+  rails:
+    build:
+      context: .
+      dockerfile: Dockerfile
+      args:
+        RUBY_VERSION: ${RUBY_VERSION}
+    volumes:
+      - .:/rails
+      - gems:/usr/local/bundle
+    ports:
+      - "3000:3000"
+    depends_on:
+      - postgres
+    environment:
+      RAILS_ENV: ${RAILS_ENV}
+      BUNDLE_WITHOUT: ${BUNDLE_WITHOUT}
+      DATABASE_HOST: ${DATABASE_HOST}
+      DATABASE_USER: ${DATABASE_USER}
+      DATABASE_PASSWORD: ${DATABASE_PASSWORD}
+      DATABASE_NAME: ${DATABASE_NAME}
+
+volumes:
+  pgdata:
+  gems:
