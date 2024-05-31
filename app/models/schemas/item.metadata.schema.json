@@ -1,0 +1,31 @@
+{
+  "$id": "item.metadata.schema.json",
+  "title": "Item metadata",
+  "description": "Defines the JSON structure for the metadata database field. This includes the values of custom fields specified in the item type, located within the settings column.",
+  "type": "object",
+  "properties": {
+    "fields": {
+      "type": "array",
+      "items": {
+        "type": "object",
+        "properties": {
+          "key": {
+            "type": "string"
+          },
+          "value": {
+            "type": "string"
+          }
+        },
+        "additionalProperties": false,
+        "required": [
+          "key",
+          "value"
+        ]
+      }
+    }
+  },
+  "required": [
+    "fields"
+  ],
+  "additionalProperties": false
+}
