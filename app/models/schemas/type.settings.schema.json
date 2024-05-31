@@ -1,0 +1,31 @@
+{
+  "$id": "type.settings.schema.json",
+  "title": "Item type settings",
+  "description": "Defines additional settings that can be saved to an item type.",
+  "type": "object",
+  "properties": {
+    "fields": {
+      "description": "Definition of fields for additional data in a item's metadata.",
+      "type": "array",
+      "items": {
+        "type": "object",
+        "properties": {
+          "key": {
+            "type": "string",
+            "description": "An unique key that identifies the field."
+          },
+          "type": {
+            "type": "string"
+          },
+          "required": {
+            "type": "boolean"
+          },
+          "additionalProperties": false
+        },
+        "required": ["key", "type", "required"]
+      }
+    }
+  },
+  "required": ["fields"],
+  "additionalProperties": false
+}
