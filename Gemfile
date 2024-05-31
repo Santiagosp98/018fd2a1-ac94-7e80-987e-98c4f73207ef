@@ -1,3 +1,5 @@
+# frozen_string_literal: true
+
 source 'https://rubygems.org'
 
 ruby '3.3.1'
@@ -46,6 +48,8 @@ group :development, :test do
   gem 'rubocop', '~> 1.64'
 
   gem 'rubocop-rails', '~> 2.25'
+
+  gem 'rspec-rails', '~> 6.1.0'
 end
 
 group :development do
