@@ -10,17 +10,17 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema[7.1].define(version: 2024_05_29_223513) do
+ActiveRecord::Schema[7.1].define(version: 2024_05_31_035550) do
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
 
   create_table "items", force: :cascade do |t|
     t.string "name", null: false
-    t.bigint "types_id", null: false
+    t.bigint "type_id", null: false
     t.string "description", null: false
     t.integer "quantity", null: false
     t.decimal "price", precision: 19, scale: 4, null: false
-    t.text "thumbnail_url", null: false
+    t.string "thumbnail_url", limit: 510, null: false
     t.jsonb "metadata"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
@@ -43,7 +43,7 @@ ActiveRecord::Schema[7.1].define(version: 2024_05_29_223513) do
     t.string "status", null: false
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
-    t.check_constraint "status::text = ANY (ARRAY['pending'::character varying, 'paid'::character varying, 'shipped'::character varying, 'delivered'::character varying, 'cancelled'::character varying]::text[])"
+    t.check_constraint "status::text = ANY (ARRAY['pending'::character varying::text, 'paid'::character varying::text, 'shipped'::character varying::text, 'delivered'::character varying::text, 'cancelled'::character varying::text])"
   end
 
   create_table "stock_transactions", force: :cascade do |t|
@@ -53,7 +53,7 @@ ActiveRecord::Schema[7.1].define(version: 2024_05_29_223513) do
     t.string "transaction_type", null: false
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
-    t.check_constraint "transaction_type::text = ANY (ARRAY['purchase'::character varying, 'sale'::character varying, 'return'::character varying, 'adjustment'::character varying]::text[])"
+    t.check_constraint "transaction_type::text = ANY (ARRAY['purchase'::character varying::text, 'sale'::character varying::text, 'return'::character varying::text, 'adjustment'::character varying::text])"
   end
 
   create_table "types", force: :cascade do |t|
@@ -63,7 +63,7 @@ ActiveRecord::Schema[7.1].define(version: 2024_05_29_223513) do
     t.datetime "updated_at", null: false
   end
 
-  add_foreign_key "items", "types", column: "types_id"
+  add_foreign_key "items", "types"
   add_foreign_key "order_items", "items", column: "items_id"
   add_foreign_key "order_items", "orders"
   add_foreign_key "stock_transactions", "items", column: "items_id"
