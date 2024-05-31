@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema[7.1].define(version: 2024_05_31_035550) do
+ActiveRecord::Schema[7.1].define(version: 2024_05_31_090812) do
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
 
@@ -28,7 +28,7 @@ ActiveRecord::Schema[7.1].define(version: 2024_05_31_035550) do
   end
 
   create_table "order_items", force: :cascade do |t|
-    t.bigint "items_id", null: false
+    t.bigint "item_id", null: false
     t.bigint "order_id", null: false
     t.integer "quantity", null: false
     t.decimal "unit_price", precision: 19, scale: 4, null: false
@@ -47,8 +47,8 @@ ActiveRecord::Schema[7.1].define(version: 2024_05_31_035550) do
   end
 
   create_table "stock_transactions", force: :cascade do |t|
-    t.bigint "items_id", null: false
-    t.bigint "orders_id", null: false
+    t.bigint "item_id", null: false
+    t.bigint "order_id", null: false
     t.integer "change", null: false
     t.string "transaction_type", null: false
     t.datetime "created_at", null: false
@@ -64,8 +64,8 @@ ActiveRecord::Schema[7.1].define(version: 2024_05_31_035550) do
   end
 
   add_foreign_key "items", "types"
-  add_foreign_key "order_items", "items", column: "items_id"
+  add_foreign_key "order_items", "items"
   add_foreign_key "order_items", "orders"
-  add_foreign_key "stock_transactions", "items", column: "items_id"
-  add_foreign_key "stock_transactions", "orders", column: "orders_id"
+  add_foreign_key "stock_transactions", "items"
+  add_foreign_key "stock_transactions", "orders"
 end
