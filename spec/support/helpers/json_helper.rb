@@ -14,6 +14,17 @@ module Support
           end
         }
       end
+
+      def self.generate_metadata
+        {
+          fields: Array.new(Faker::Number.between(from: 1, to: 5)) do
+            {
+              key: Faker::Lorem.unique.word,
+              value: Faker::Lorem.paragraph(sentence_count: 3)
+            }
+          end
+        }
+      end
     end
   end
 end

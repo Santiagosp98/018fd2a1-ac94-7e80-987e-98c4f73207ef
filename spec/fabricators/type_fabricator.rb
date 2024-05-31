@@ -3,6 +3,7 @@
 module Fabricators
   module TypeFabricator
     Fabricator(:type) do
+      id { Faker::Number.unique.number }
       name { Faker::Commerce.department }
     end
 
@@ -33,6 +34,4 @@ module Fabricators
       end
     end
   end
-
 end
-
