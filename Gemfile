@@ -50,6 +50,10 @@ group :development, :test do
   gem 'rubocop-rails', '~> 2.25'
 
   gem 'rspec-rails', '~> 6.1.0'
+
+  gem 'fabrication', '~> 2.31'
+
+  gem 'faker', '~> 3.4'
 end
 
 group :development do
