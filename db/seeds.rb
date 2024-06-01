@@ -7,3 +7,17 @@
 #   ["Action", "Comedy", "Drama", "Horror"].each do |genre_name|
 #     MovieGenre.find_or_create_by!(name: genre_name)
 #   end
+Rails.root.glob('spec/support/**/*.rb').sort.each { |f| require f }
+
+Type.destroy_all
+Item.destroy_all
+
+types = []
+
+2.times do
+  types << Fabricate(:type)
+end
+
+30.times do
+  Fabricate(:item, type: types.sample)
+end
