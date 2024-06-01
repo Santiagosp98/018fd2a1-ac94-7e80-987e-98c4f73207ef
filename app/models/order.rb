@@ -3,6 +3,7 @@
 # Order model definition.
 class Order < ApplicationRecord
   STATUSES = %w[pending paid shipped delivered cancelled].freeze
+  has_many :order_items, dependent: :restrict_with_error
 
   validates :date, :total_amount, :status, presence: true
   validates :date, comparison: { greater_than_or_equal_to: Date.current }

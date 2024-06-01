@@ -3,8 +3,7 @@
 module Fabricators
   module TypeFabricator
     Fabricator(:type) do
-      id { Faker::Number.unique.number }
-      name { Faker::Commerce.department }
+      name { Faker::Commerce.department(max: 1) }
     end
 
     Fabricator(:settings) do
